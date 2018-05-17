@@ -4,45 +4,46 @@ package networksapp;
  *
  * @author GHAMRY, HAZEM, and ALY
  */
-public class Edge {
+public class Edge{
+
     private int ID;
     private Node source;
     private Node destination;
     private int weight;
 
-    public Edge(int ID, Node source, Node destination, int weight) {
+    public Edge (int ID, Node source, Node destination, int weight){
         this.ID = ID;
         this.source = source;
         this.destination = destination;
         this.weight = weight;
     }
 
-    public int getID() {
+    public int getID (){
         return ID;
     }
 
-    public Node getSource() {
+    public Node getSource (){
         return source;
     }
 
-    public void setSource(Node source) {
+    public void setSource (Node source){
         this.source = source;
     }
 
-    public Node getDestination() {
+    public Node getDestination (){
         return destination;
     }
 
-    public void setDestination(Node destination) {
+    public void setDestination (Node destination){
         this.destination = destination;
     }
 
-    public int getWeight() {
+    public int getWeight (){
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight (int weight){
         this.weight = weight;
     }
-    
+
 }

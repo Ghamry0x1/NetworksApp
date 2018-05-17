@@ -13,7 +13,8 @@ import java.util.Set;
  *
  * @author GHAMRY, HAZEM, and ALY
  */
-public class Dijkastra {
+public class Dijkastra{
+
     private List<Node> nodes;
     private List<Edge> edges;
     private Set<Node> settledNodes;
@@ -21,31 +22,31 @@ public class Dijkastra {
     private Map<Node, Node> predecessors;
     private Map<Node, Integer> distance;
 
-    public Dijkastra(Graph graph) {
+    public Dijkastra (Graph graph){
         this.nodes = new ArrayList<Node>(graph.getNodes());
         this.edges = new ArrayList<Edge>(graph.getEdges());
     }
-    
-    public void execute(Node source) {
+
+    public void execute (Node source){
         settledNodes = new HashSet<Node>();
         unSettledNodes = new HashSet<Node>();
         distance = new HashMap<Node, Integer>();
         predecessors = new HashMap<Node, Node>();
         distance.put(source, 0);
         unSettledNodes.add(source);
-        while (unSettledNodes.size() > 0) {
+        while (unSettledNodes.size() > 0){
             Node node = getMinimum(unSettledNodes);
             settledNodes.add(node);
             unSettledNodes.remove(node);
             findMinimalDistances(node);
         }
     }
-    
-    public void findMinimalDistances(Node node) {
+
+    public void findMinimalDistances (Node node){
         List<Node> adjacentNodes = getNeighbors(node);
-        for (Node target : adjacentNodes) {
+        for (Node target : adjacentNodes){
             if (getShortestDistance(target) > getShortestDistance(node)
-                    + getDistance(node, target)) {
+                    + getDistance(node, target)){
                 distance.put(target, getShortestDistance(node)
                         + getDistance(node, target));
                 predecessors.put(target, node);
@@ -53,35 +54,35 @@ public class Dijkastra {
             }
         }
     }
-    
-    private int getDistance(Node node, Node target) {
-        for (Edge edge : edges) {
+
+    private int getDistance (Node node, Node target){
+        for (Edge edge : edges){
             if (edge.getSource().equals(node)
-                    && edge.getDestination().equals(target)) {
+                    && edge.getDestination().equals(target)){
                 return edge.getWeight();
             }
         }
         throw new RuntimeException("Should not happen");
     }
-    
-    private List<Node> getNeighbors(Node node) {
+
+    private List<Node> getNeighbors (Node node){
         List<Node> neighbors = new ArrayList<Node>();
-        for (Edge edge : edges) {
+        for (Edge edge : edges){
             if (edge.getSource().equals(node)
-                    && !isSettled(edge.getDestination())) {
+                    && !isSettled(edge.getDestination())){
                 neighbors.add(edge.getDestination());
             }
         }
         return neighbors;
     }
 
-    private Node getMinimum(Set<Node> Nodees) {
+    private Node getMinimum (Set<Node> Nodees){
         Node minimum = null;
-        for (Node Node : Nodees) {
-            if (minimum == null) {
+        for (Node Node : Nodees){
+            if (minimum == null){
                 minimum = Node;
-            } else {
-                if (getShortestDistance(Node) < getShortestDistance(minimum)) {
+            }else{
+                if (getShortestDistance(Node) < getShortestDistance(minimum)){
                     minimum = Node;
                 }
             }
@@ -89,15 +90,15 @@ public class Dijkastra {
         return minimum;
     }
 
-    private boolean isSettled(Node Node) {
+    private boolean isSettled (Node Node){
         return settledNodes.contains(Node);
     }
 
-    private int getShortestDistance(Node destination) {
+    private int getShortestDistance (Node destination){
         Integer d = distance.get(destination);
-        if (d == null) {
+        if (d == null){
             return Integer.MAX_VALUE;
-        } else {
+        }else{
             return d;
         }
     }
@@ -106,15 +107,15 @@ public class Dijkastra {
      * This method returns the path from the source to the selected target and
      * NULL if no path exists
      */
-    public LinkedList<Node> getPath(Node target) {
+    public LinkedList<Node> getPath (Node target){
         LinkedList<Node> path = new LinkedList<Node>();
         Node step = target;
         // check if a path exists
-        if (predecessors.get(step) == null) {
+        if (predecessors.get(step) == null){
             return null;
         }
         path.add(step);
-        while (predecessors.get(step) != null) {
+        while (predecessors.get(step) != null){
             step = predecessors.get(step);
             path.add(step);
         }
@@ -122,6 +123,5 @@ public class Dijkastra {
         Collections.reverse(path);
         return path;
     }
-
 
 }
