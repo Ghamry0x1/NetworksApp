@@ -1,32 +1,27 @@
 package networksapp;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author GHAMRY, HAZEM, and ALY
  */
 public class Node {
     private int ID;
-    private float power;
     private int x;
     private int y;
+    private List<String> MessageID;
     
-    public Node(int ID, float power, int x, int y) {
+    public Node(int ID, int x, int y) {
         this.ID = ID;
-        this.power = power;
         this.x = x;
         this.y = y;
+        MessageID = new ArrayList<>();
     }
 
     public int getID() {
         return ID;
-    }
-
-    public float getPower() {
-        return power;
-    }
-
-    public void setPower(float power) {
-        this.power = power;
     }
 
     public int getX() {
